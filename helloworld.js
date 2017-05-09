@@ -1,4 +1,45 @@
-setTimeout(function () {
+/*setTimeout(function () {
 	console.log('timeout 0');
 }, 0);
-console.log('outter');
+console.log('outter');*/
+
+if (undefined) {
+	console.log('undefined is true');
+}
+if (null) {
+	console.log('null is true');
+}
+if ('') {
+	console.log('\'\' is true');
+}
+if (0) { //这个是true
+	console.log('0 is true');
+}
+if ('0') {
+	console.log('\'0\' is true');
+}
+if (NaN) {
+	console.log('NaN is true');
+}
+
+var array = ['aa', 'bb', 'cc'];
+
+// 删除数组中第一个元素的数据，并赋值给first
+var first = array.shift();
+
+console.log(first);
+
+// 在数组的开头添加一个元素
+array.unshift('123');
+
+console.log(array);
+
+// 删除数组中最后一个元素的数据，并赋值给last
+var last = array.pop();
+
+console.log(last);
+
+// 在数组的末尾添加一个元素
+array.push('456');
+
+console.log(array);
