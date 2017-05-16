@@ -1,0 +1,45 @@
+<html>
+
+<head>
+	<title>testHtml</title>
+	<script type="text/javascript" src="JavaScript/jquery.min.js"></script>
+</head>
+
+<body>
+	<p style="display: none" id="testP">Hello</p>
+	<script type="text/javascript">
+		var testP = $("#testP");
+
+		testP.show("slow");
+
+		/*testP.click(function() { testP.hide("slow"); });*/
+		var vs = $.browser.version;
+
+		if ($.browser.msie)
+			alert($.browser.version);
+
+		/*
+				var test = {};
+				test['aa'] = 'aa';
+				test['bb'] = 'bb';
+				test['cc'] = 'cc';
+				console.log(test);
+
+				delete test['bb'];
+
+				console.log(test);
+
+				var testArray = [];
+				testArray.push('aa'); //进栈
+				testArray.push('bb');
+				console.log(testArray);
+
+				testArray.pop(); //弹栈
+				testArray.pop();
+				console.log(testArray);
+				*/
+
+	</script>
+</body>
+
+</html>
