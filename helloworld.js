@@ -50,11 +50,17 @@ console.log(array);*/
 
 //---------------------------------------------------------
 
-let c = 3;
+/*let c = 3;
 console.log('函数外let定义c：' + c); //输出c=3
 function change() {
 	let c = 6;
 	console.log('函数内let定义c：' + c); //输出c=6
 }
 change();
-console.log('函数调用后let定义c不受函数内部定义影响：' + c); //输出c=3
+console.log('函数调用后let定义c不受函数内部定义影响：' + c); //输出c=3*/
+
+//---------------------------------------------------------
+
+var 年龄 = 12;
+
+console.log(年龄);

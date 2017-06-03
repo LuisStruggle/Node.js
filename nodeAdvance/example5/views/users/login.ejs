@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Login测试Session</title>
+	<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+</head>
+
+<body>
+
+	<form method="post" action="/users/do/login" id="loginForm">
+		<p>
+			<label for="username">用户名</label>
+			<input name="username" type="text" />
+		</p>
+		<p>
+			<label for="password">密码</label>
+			<input name="password" type="password" />
+		</p>
+		<p>
+			<input type="submit" value="登陆" />
+		</p>
+	</form>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#loginForm').submit(function() {
+				var $this = $(this);
+				$.ajax({
+					method: $this.attr('method'),
+					url: $this.attr('action'),
+					data: $this.serialize(),
+					dataType: 'json'
+				}).done(function(result) {
+					if (result.code == 0) {
+						return location.href = '/users/admin';
+					}
+					alert(result.msg || '服务器异常');
+				}).fail(function() {
+					alert('网络异常');
+				});
+				return false;
+			});
+		});
+
+	</script>
+</body>
+
+</html>
