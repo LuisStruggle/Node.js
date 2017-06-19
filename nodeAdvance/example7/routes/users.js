@@ -11,4 +11,10 @@ router.get('/', function (req, res, next) {
 
 router.get('/userList', user.userList);
 
+router.post('/deleteUser', user.deleteUser);
+
+router.post('/userManage', user.userManage);
+
+router.post('/getUserById', user.getUserById);
+
 module.exports = router;

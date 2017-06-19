@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
-app.use(cookieParser());
+app.use(cookieParser('myProject'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //该页面有中间件的先后顺序，这个要注意中间件的注册顺序

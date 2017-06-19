@@ -35,8 +35,8 @@ server.on('listening', onListening);
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
+  
+  if (isNaN(port)) {  
     // named pipe
     return val;
   }
@@ -86,5 +86,9 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
+	
+  // 打印出启动服务的端口
+  console.log(bind);
+  
   debug('Listening on ' + bind);
 }

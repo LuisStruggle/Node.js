@@ -20,10 +20,84 @@
 </head>
 
 <body>
+	<div class="container">
+		<div class="row" style="height:60px;">
+			<div class="col-md-10">
+				<h3>用户信息管理</h3>
+			</div>
+			<div class="col-md-2 text-right" style="line-height:60px;">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">添加</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-bordered">
+					<tr>
+						<th>ID</th>
+						<th>姓名</th>
+						<th>性别</th>
+						<th>年龄</th>
+						<th>操作</th>
+					</tr>
+					<% if(userList!=null){ %>
+						<% for(var i=0;i<userList.length;i++){ %>
+							<!-- 遍历列表 -->
+							<tr>
+								<td>
+									<%= userList[i]._id %>
+								</td>
+								<td>
+									<%= userList[i].name %>
+								</td>
+								<td>
+									<%= userList[i].sex %>
+								</td>
+								<td>
+									<%= userList[i].age %>
+								</td>
+								<td>
+									<a href="javascript:editUser('<%=userList[i]._id %>');"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:deleteUser('<%=userList[i]._id %>');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;删除</a>
+								</td>
+							</tr>
+							<% } } %>
+				</table>
+			</div>
+		</div>
+	</div>
 
-	<button class="btn btn-info" onclick="test();">确定</button>
-
-	<button class="btn btn-warning">取消</button>
+	<!-- 添加，修改弹出框 -->
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">用户维护</h4>
+				</div>
+				<div class="modal-body">
+					<form method="post" action="userManage" id="userManage">
+						<div class="form-group">
+							<label for="name" class="control-label">姓名：</label>
+							<input type="text" class="form-control" name="name" id="name">
+						</div>
+						<div class="form-group">
+							<label for="sex" class="control-label">性别：</label>
+							<input type="text" class="form-control" name="sex" id="sex">
+						</div>
+						<div class="form-group">
+							<label for="age" class="control-label">年龄：</label>
+							<input type="text" class="form-control" name="age" id="age">
+						</div>
+						<input type="hidden" name="_id" id="_id">
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="submitUser">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
@@ -31,8 +105,76 @@
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
-		var test = function() {
-			alert("aa");
+		$(function() {
+			$('#submitUser').click(function() {
+				var data = $('#userManage').serializeArray();
+				if (data[0].value == null || data[0].value == "") {
+					alert('姓名不能为空！');
+				} else if (data[1].value == null || data[1].value == "") {
+					alert('性别不能为空！');
+				} else if (data[2].value == null || data[2].value == "") {
+					alert('年龄不能为空！');
+				} else {
+					$('#userManage').submit();
+				}
+			});
+		});
+
+		// 删除
+		var deleteUser = function(userId) {
+			if (userId == null || userId == '') {
+				alert("请选择要删除的数据！");
+			} else {
+				if (confirm("确定要删除数据吗？")) {
+					var json = {
+						userId: userId
+					};
+					$.ajax({
+						type: "post",
+						url: "deleteUser",
+						dataType: "json",
+						data: json,
+						async: false,
+						success: function(data) {
+							if (data.state == 1) {
+								window.location.reload();
+							} else {
+								alert("数据删除失败！");
+							}
+						}
+					});
+				}
+
+			}
+		}
+
+		// 修改
+		var editUser = function(userId) {
+			if (userId == null || userId == '') {
+				alert("请选择要修改的数据！");
+			} else {
+				var json = {
+					userId: userId
+				};
+				$.ajax({
+					type: "post",
+					url: "getUserById",
+					dataType: "json",
+					data: json,
+					async: false,
+					success: function(data) {
+						if (data.state == 0) {
+							alert("请选择要修改的数据！");
+						} else {
+							$("#userManage #name").val(data.user.name);
+							$("#userManage #sex").val(data.user.sex);
+							$("#userManage #age").val(data.user.age);
+							$("#userManage #_id").val(data.user._id);
+							$('#myModal').modal('toggle');
+						}
+					}
+				});
+			}
 		}
 
 	</script>
