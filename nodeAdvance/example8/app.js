@@ -8,14 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-var db = require('./src/dao/connection');
-
 var app = express();
-
-// mongodb connection
-// var mongo = require('mongodb');
-// var monk = require('monk');
-// var db = monk('admin:123456@localhost:27017/myProject');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,12 +23,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// 注入db，有先后顺序
-app.use(function (req, res, next) {
-	req.db = db;
-	next();
-});
 
 app.use('/', index);
 app.use('/users', users);
