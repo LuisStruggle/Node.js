@@ -1,0 +1,45 @@
+[2017-06-27 16:35:59.963] [ERROR] user - { ValidationError: User validation failed: age: Cast to Number failed for value "12啊" at path "age"
+    at MongooseError.ValidationError.inspect (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\mongoose\lib\error\validation.js:64:23)
+    at formatValue (util.js:349:36)
+    at inspect (util.js:183:10)
+    at Object.exports.format (util.js:69:24)
+    at Object.inspect (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\log4js\lib\layouts.js:34:23)
+    at formatValue (util.js:349:36)
+    at inspect (util.js:183:10)
+    at Object.exports.format (util.js:69:24)
+    at formatLogData (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\log4js\lib\layouts.js:54:22)
+    at basicLayout (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\log4js\lib\layouts.js:116:7)
+    at Logger.<anonymous> (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\log4js\lib\appenders\file.js:63:18)
+    at emitOne (events.js:101:20)
+    at Logger.emit (events.js:188:7)
+    at Logger._log (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\log4js\lib\logger.js:96:8)
+    at Logger.(anonymous function) [as error] (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\log4js\lib\logger.js:89:12)
+    at D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\controllers\userController.js:45:12
+  errors: 
+   { age: 
+      { CastError: Cast to Number failed for value "12啊" at path "age"
+          at MongooseError.CastError (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\mongoose\lib\error\cast.js:26:11)
+          at model.Document.set (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\mongoose\lib\document.js:754:7)
+          at model._handleIndex (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\mongoose\lib\document.js:587:14)
+          at model.Document.set (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\mongoose\lib\document.js:547:24)
+          at model.Document (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\mongoose\lib\document.js:71:12)
+          at model.Model (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\mongoose\lib\model.js:46:12)
+          at new model (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\mongoose\lib\model.js:3621:13)
+          at Object.insertUser (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\services\userService.js:14:14)
+          at exports.userManage (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\controllers\userController.js:41:8)
+          at Layer.handle [as handle_request] (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\express\lib\router\layer.js:95:5)
+          at next (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\express\lib\router\route.js:137:13)
+          at Route.dispatch (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\express\lib\router\route.js:112:3)
+          at Layer.handle [as handle_request] (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\express\lib\router\layer.js:95:5)
+          at D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\express\lib\router\index.js:281:22
+          at Function.process_params (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\express\lib\router\index.js:335:12)
+          at next (D:\GitHubWorkspaces\Node.js\nodeAdvance\example8\node_modules\express\lib\router\index.js:275:10)
+        message: 'Cast to Number failed for value "12啊" at path "age"',
+        name: 'CastError',
+        stringValue: '"12啊"',
+        kind: 'Number',
+        value: '12啊',
+        path: 'age',
+        reason: [Object] } },
+  _message: 'User validation failed',
+  name: 'ValidationError' }

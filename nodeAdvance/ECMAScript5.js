@@ -8,6 +8,9 @@ function PersonES5(p) {
 
 PersonES5.prototype.showInfo = function () {
 	console.log(this);
+	console.log(this.age);
+	console.log(this.name);
+	console.log(this.sex);
 };
 
 var person = new PersonES5({

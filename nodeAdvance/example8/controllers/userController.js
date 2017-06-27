@@ -1,4 +1,5 @@
 const user = require('../services/userService');
+const logger = require('../config/logger');
 
 exports.userList = function (req, res, next) {
 	user.getAllUser({}, function (err, docs) {
@@ -12,6 +13,11 @@ exports.userList = function (req, res, next) {
 					userList: null
 				});
 			}
+		} else {
+			logger.error(err);
+			return res.render('users/userList', {
+				userList: null
+			});
 		}
 	});
 }
@@ -30,6 +36,11 @@ exports.deleteUser = function (req, res, next) {
 					state: 0
 				});
 			}
+		} else {
+			logger.error(err);
+			return res.send({
+				state: 0
+			});
 		}
 	});
 }
@@ -40,12 +51,18 @@ exports.userManage = function (req, res, next) {
 		user.insertUser(_body, function (err, result) {
 			if (!err) {
 				return res.redirect('userList');
+			} else {
+				logger.error(err);
+				next(err);
 			}
 		});
 	} else { //更新
 		user.updateUser(_body, function (err, result) {
 			if (!err) {
 				return res.redirect('userList');
+			} else {
+				logger.error(err);
+				next(err);
 			}
 		});
 	}
@@ -66,6 +83,11 @@ exports.getUserById = function (req, res, next) {
 					state: 0
 				});
 			}
+		} else {
+			logger.error(err);
+			return res.send({
+				state: 0
+			});
 		}
 	});
 }
