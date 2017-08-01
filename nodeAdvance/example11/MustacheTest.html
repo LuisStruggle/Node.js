@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Mustache.js语法学习</title>
+	<script type="text/javascript" src="node_modules/mustache/mustache.min.js"></script>
+</head>
+
+<body>
+
+	<h1>mustache语法</h1>
+
+	<div>mustache 模板，用于构造html页面内容。在实际工作中，当同一个模板中想要调用不同的函数来渲染画面，在已经自定义好了的前提下，可以在渲染页面时对传入的参数进行手动判断。【在不好判断的情况下，我们可以通过改变传入参数来进行判断】跟小白我来看看该模板的语法吧。 Mustache 的模板语法很简单，就那么几个：</div>
+
+	<div>
+		<ul>
+			<li>{{data}}</li>
+			<li>{{#data}} {{/data}}</li>
+			<li>{{^data}} {{/data}}</li>
+			<li>{{.}}</li>
+			<li>{{&lt;partials}} </li>
+			<li>{{{data}}}</li>
+			<li>{{!comments}}</li>
+		</ul>
+
+		<div>参考地址：http://www.cnblogs.com/DF-fzh/p/5979093.html</div>
+
+		<script type="text/javascript ">
+			// Mustache.js语法学习笔记，一种页面模板引擎
+			var data = {
+				"name ": "Willy "
+			};
+			var value = Mustache.render("{{name}} is awesome. ", data);
+
+			console.log(value);
+
+		</script>
+</body>
+
+</html>

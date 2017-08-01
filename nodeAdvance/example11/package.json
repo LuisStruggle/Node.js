@@ -1,0 +1,14 @@
+{
+  "name": "example11",
+  "version": "1.0.0",
+  "description": "VUE学习",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "刘洋",
+  "license": "ISC",
+  "dependencies": {
+    "mustache": "^2.3.0"
+  }
+}

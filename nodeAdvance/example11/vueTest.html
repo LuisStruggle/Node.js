@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>VUE简单学习</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+	<div id="ID1">
+		{{ message }}
+	</div>
+
+	<div id="ID2" style="margin-top:30px;">
+		<span v-bind:title="message">鼠标悬停几秒钟查看此处动态绑定的提示信息！</span>
+	</div>
+
+	<div id="ID3" style="margin-top:30px;">
+		<p v-if="flag">现在你看到我了</p>
+	</div>
+
+	<div id="ID4" style="margin-top:30px;">
+		<ul>
+			<li v-for="todo in todos">
+				{{ todo.text }}
+			</li>
+		</ul>
+	</div>
+
+	<div id="ID5" style="margin-top:30px;">
+		<p>{{ message }}</p>
+		<button v-on:click="reverseMessage">逆转消息</button>
+	</div>
+
+	<div id="ID6" style="margin-top:30px;">
+		<p>{{ message }}</p>
+		<input v-model="message">
+	</div>
+
+	<div id="ID7" style="margin-top:30px;">
+		<ul>
+
+			<!-- 创建一个 todo-item 组件的实例 -->
+			<todo-item></todo-item>
+		</ul>
+	</div>
+
+	<div id="ID8" style="margin-top:30px;">
+		<ul>
+
+			<!-- 创建一个 todo-item-param 组件的实例 -->
+			<todo-item-param v-for="todo in todos" v-bind:param="todo"></todo-item-param>
+		</ul>
+	</div>
+
+	<div id="ID9" style="margin-top:30px;">
+		<!-- 当成html来解析 -->
+		<div v-html="rawHtml"></div>
+
+		<!-- 纯文本输出 -->
+		<div v-text="rawHtml"></div>
+	</div>
+
+	<div id="ID10" style="margin-top:30px;">
+		<div v-bind:id="dynamicId"></div>
+		<button v-bind:disabled="isButtonDisabled">Button</button>
+	</div>
+
+	<div id="ID11" style="margin-top:30px;">
+		{{ message.split(' ').join('&') }}
+	</div>
+
+	<div id="ID12" style="margin-top:30px;">
+		<p>Original message: "{{ message }}"</p>
+		<p>Computed reversed message: "{{ reversedMessage }}"</p>
+	</div>
+
+	<div id="ID13" style="margin-top:30px;">
+		<div v-bind:class="{ active: isActive }"></div>
+	</div>
+
+	<div id="ID14" style="margin-top:30px;">
+		<div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">hello Vue</div>
+	</div>
+
+	<div id="ID15" style="margin-top:30px;">
+		<div v-bind:style="styleObject">hello Vue</div>
+	</div>
+
+	<div id="ID16" style="margin-top:30px;">
+		<!-- v-else 元素必须紧跟在 v-if 或者 v-else-if 元素的后面——否则它将不会被识别。 -->
+		<h1 v-if="ok">Yes</h1>
+		<h1 v-else>No</h1>
+	</div>
+	<script type="text/javascript">
+		// 自定义名为 todo-item 的新组件
+		Vue.component('todo-item', {
+			template: '<li>这是个待办项</li>'
+		});
+
+		Vue.component('todo-item-param', {
+			// todo-item-param 组件现在接受一个"prop"，类似于一个自定义属性，这个属性名为 param。
+			props: ['param'],
+			template: '<li>{{ param.text }}</li>'
+		});
+
+		var ID1 = new Vue({
+			el: '#ID1',
+			data: {
+				message: 'hello Vue！'
+			}
+		});
+
+		var ID2 = new Vue({
+			el: '#ID2',
+			data: {
+				message: '页面加载于 ' + new Date()
+			}
+		});
+
+		var ID3 = new Vue({
+			el: '#ID3',
+			data: {
+				flag: true
+			}
+		});
+
+		var ID4 = new Vue({
+			el: '#ID4',
+			data: {
+				todos: [{
+						text: "你好1"
+					}, {
+						text: "你好2"
+					},
+					{
+						text: "你好3"
+					}
+				]
+			}
+		});
+
+		var ID5 = new Vue({
+			el: '#ID5',
+			data: {
+				message: 'hello Vue.js'
+			},
+			methods: {
+				reverseMessage: function() {
+					// reverse()将数据逆序，join(' ')将数组按空格转成字符串
+					this.message = this.message.split(' ').reverse().join(' ');
+				}
+			}
+		});
+
+		var ID6 = new Vue({
+			el: '#ID6',
+			data: {
+				message: 'hello Vue.js'
+			}
+		});
+
+		var ID7 = new Vue({
+			el: '#ID7'
+		});
+
+		var ID8 = new Vue({
+			el: '#ID8',
+			data: {
+				todos: [{
+					text: 'hello1'
+				}, {
+					text: 'hello2'
+				}, {
+					text: 'hello3'
+				}]
+			},
+			created: function() { //实例化Vue实例的一些触发事件
+				console.log(this.todos[0].text);
+			}
+		});
+
+		var ID9 = new Vue({
+			el: '#ID9',
+			data: {
+				rawHtml: '<span>nihaoma</span>'
+			}
+		});
+
+		var ID10 = new Vue({
+			el: '#ID10',
+			data: {
+				dynamicId: 'IDTEST',
+				isButtonDisabled: false
+			}
+		});
+
+		var ID11 = new Vue({
+			el: '#ID11',
+			data: {
+				message: 'hello world'
+			}
+		});
+
+		var ID12 = new Vue({
+			el: '#ID12',
+			data: {
+				message: 'Hello'
+			},
+			computed: {
+				// a computed getter
+				reversedMessage: function() {
+					// `this` points to the ID12 instance
+					return this.message.split('').reverse().join('')
+				}
+			}
+		});
+
+		var ID13 = new Vue({
+			el: '#ID13',
+			data: {
+				isActive: true
+			}
+		});
+
+		var ID14 = new Vue({
+			el: '#ID14',
+			data: {
+				activeColor: 'red',
+				fontSize: 30
+			}
+		});
+
+		var ID15 = new Vue({
+			el: '#ID15',
+			data: {
+				styleObject: {
+					color: 'red',
+					fontSize: '13px'
+				}
+			}
+		});
+
+		var ID16 = new Vue({
+			el: '#ID16',
+			data: {
+				ok: true
+			}
+		});
+	</script>
+</body>
+
+</html>
