@@ -3,7 +3,7 @@
     <div class="row yhgl">
       <div class="col-md-8">用户管理</div>
       <div class="col-md-4 text-right">
-        <router-link to="/userAdd" class="btn btn-success" data-toggle="modal"data-target="#myModal">添加用户</router-link>
+        <router-link to="/userAdd" class="btn btn-success" data-toggle="modal" data-target="#myModal">添加用户</router-link>
       </div>
     </div>
     <div class="row">
@@ -23,7 +23,11 @@
             <td>{{ user.name }}</td>
             <td>{{ user.sex }}</td>
             <td>{{ user.age }}</td>
-            <td><a href="#" @click="userEdit(user.name)">编辑</a></td>
+            <td>
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;<router-link :to="{path:'/userAdd',query:{_id:user._id}}" data-toggle="modal" data-target="#myModal">编辑</router-link>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;&nbsp;<a href="#" @click="userDelete(user._id)">删除</a>
+            </td>
           </tr>
         </tbody>
       </table>      
@@ -41,8 +45,12 @@
     },
     data() {
       return {
-        userList: []
+        userList: [],
+        user: {}
       }
+    },
+    watch: {
+      '$route': 'getUserList'
     },
     methods: {
       getUserList() {
@@ -52,8 +60,18 @@
           console.log(err)
         })
       },
-      userEdit(userName) {
-        alert(userName)
+      userDelete(userId) {
+        if (confirm('确定要删除该数据吗？')) {
+          this.$http.post('/api/delete', {
+            _id: userId
+          }).then(res => {
+            console.log(res)
+            this.$router.push('/userList')
+          }).catch(err => {
+            alert('删除数据失败！')
+            console.log(err)
+          })
+        }
       }
     }
   }
